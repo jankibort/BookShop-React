@@ -4,9 +4,11 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Spinner,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -47,6 +49,8 @@ const schema = yup.object().shape({
 
 export const BookOrderForm: FC<{}> = () => {
   const { booksInCart } = useAppSelector((state) => state.books);
+  const [postRequested, setPostRequested] = useState<boolean>(false);
+  const toast = useToast();
   const {
     register,
     handleSubmit,
@@ -56,11 +60,36 @@ export const BookOrderForm: FC<{}> = () => {
   });
 
   const onSubmit = (formData: BookFormInputs) => {
+    setPostRequested(true);
     const booksDetails = booksInCart.map((bookItem) => {
       return { id: bookItem.id, quantity: bookItem.quantity };
     });
     const orderData = { ...formData, order: booksDetails };
-    postOrder(orderData);
+    postOrder(orderData)
+      .then(() => {
+        setTimeout(() => {
+          toast({
+            title: "Udało się złożyć zamówienie",
+            isClosable: true,
+            status: "success",
+            variant: "subtle",
+            duration: 5000,
+          });
+          setPostRequested(false);
+        }, 500);
+      })
+      .catch(() => {
+        setTimeout(() => {
+          toast({
+            title: "Wystąpił błąd podczas składania zamówienia",
+            isClosable: true,
+            status: "error",
+            variant: "subtle",
+            duration: 5000,
+          });
+          setPostRequested(false);
+        }, 500);
+      });
   };
 
   return (
@@ -86,8 +115,22 @@ export const BookOrderForm: FC<{}> = () => {
           <Input size="sm" {...register("zip_code")} />
           <FormErrorMessage>{errors.zip_code?.message}</FormErrorMessage>
         </FormControl>
-        <Button type="submit" colorScheme="teal" disabled={!booksInCart.length}>
-          ZAMAWIAM I PŁACĘ
+        <Button
+          type="submit"
+          colorScheme="teal"
+          disabled={!booksInCart.length || postRequested}
+        >
+          {postRequested ? (
+            <Spinner
+              thickness="4px"
+              speed="0.5s"
+              emptyColor="gray.200"
+              color="gray.600"
+              size="sm"
+            />
+          ) : (
+            <>ZAMAWIAM I PŁACĘ</>
+          )}
         </Button>
       </Stack>
     </form>

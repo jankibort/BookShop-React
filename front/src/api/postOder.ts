@@ -11,6 +11,4 @@ export type OrderDataType = {
 export const postOrder: (
   orderData: OrderDataType
 ) => Promise<OrderDataType | void> = async (orderData) =>
-  await axios
-    .post("http://localhost:3001/api/order", orderData)
-    .then((response) => console.log(response));
+  await axios.post("http://localhost:3001/api/order", orderData);

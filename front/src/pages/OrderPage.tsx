@@ -9,7 +9,7 @@ export const OrderPage: FC<{}> = () => {
       <Text mb={4} fontSize="xl">
         Szczegóły zamówienia
       </Text>
-      <SimpleGrid spacing={6} columns={2}>
+      <SimpleGrid spacing={6} columns={{ base: 1, md: 2 }}>
         <Box>
           <BookOrderForm />
         </Box>

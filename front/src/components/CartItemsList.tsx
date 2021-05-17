@@ -26,7 +26,7 @@ export const CartItemsList: FC<{}> = () => {
               borderRadius="md"
               bg="white"
               p={{ base: 2, sm: 4 }}
-              fontSize="16px"
+              fontSize={{ base: "14px", sm: "15px", md: "16px" }}
               color="gray.600"
             >
               <Center mr={4}>
