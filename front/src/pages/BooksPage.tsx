@@ -78,7 +78,7 @@ export const BooksPage: FC<{}> = () => {
         </Box>
         <SimpleGrid
           columns={{ base: 1, md: 2 }}
-          spacing={{ base: 3, sm: 6, md: 8 }}
+          spacing={{ base: 3, sm: 4, md: 5 }}
           h="100%"
         >
           {loadedBooksData?.map((data) => (

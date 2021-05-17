@@ -40,7 +40,7 @@ export const BookItem: FC<BookItemProps> = ({ bookData }) => {
       color="gray.600"
     >
       <Center pb={{ base: 2, sm: 0 }} mr={{ base: 0, sm: 4 }}>
-        <Image maxW="130px" src={bookData.cover_url} />
+        <Image maxW="115px" src={bookData.cover_url} />
       </Center>
       <Stack w="100%">
         <Box>
