@@ -8,7 +8,7 @@ Api server was cloned from https://gitlab.gwo.pl/recruitment/react-task
 - yarn install
 - yarn start
 
-#### TODO's for feature release :)
+#### TODO's for future release :)
 
 - transition on pagination change
 - more cart-management tools
