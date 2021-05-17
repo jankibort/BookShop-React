@@ -1,5 +1,6 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/layout";
 import { BookOrderForm } from "components/BookOrderForm";
+import { CartItemsList } from "components/CartItemsList";
 import { FC } from "react";
 
 export const OrderPage: FC<{}> = () => {
@@ -12,7 +13,9 @@ export const OrderPage: FC<{}> = () => {
         <Box>
           <BookOrderForm />
         </Box>
-        <Box></Box>
+        <Box>
+          <CartItemsList />
+        </Box>
       </SimpleGrid>
     </Box>
   );

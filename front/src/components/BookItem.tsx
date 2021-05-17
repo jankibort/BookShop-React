@@ -21,8 +21,12 @@ type BookItemProps = {
 export const BookItem: FC<BookItemProps> = ({ bookData }) => {
   const dispatch = useAppDispatch();
 
-  const handleClick: (id: number) => void = (id) => {
-    dispatch(addBookToCart(id));
+  const handleClick: (id: number, cover_url: string, title: string) => void = (
+    id,
+    cover_url,
+    title
+  ) => {
+    dispatch(addBookToCart({ id, cover_url, title }));
     dispatch(toggleCartDrawer());
   };
 
@@ -32,7 +36,7 @@ export const BookItem: FC<BookItemProps> = ({ bookData }) => {
       flexDirection={{ base: "column", sm: "row" }}
       bg="white"
       p={{ base: 2, sm: 4 }}
-      fontSize="17px"
+      fontSize="16px"
       color="gray.600"
     >
       <Center pb={{ base: 2, sm: 0 }} mr={{ base: 0, sm: 4 }}>
@@ -67,7 +71,13 @@ export const BookItem: FC<BookItemProps> = ({ bookData }) => {
         </Box>
         <Spacer />
         <Center>
-          <Button size="sm" w="100%" onClick={() => handleClick(bookData.id)}>
+          <Button
+            size="sm"
+            w="100%"
+            onClick={() =>
+              handleClick(bookData.id, bookData.cover_url, bookData.title)
+            }
+          >
             DODAJ DO KOSZYKA
           </Button>
         </Center>

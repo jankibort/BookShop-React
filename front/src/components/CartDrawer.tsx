@@ -18,11 +18,10 @@ import { toggleCartDrawer } from "redux/slices/ui";
 import { useAppDispatch, useAppSelector } from "store";
 import { GrFormClose } from "react-icons/gr";
 import { ROUTES } from "constants/routes";
-import { getBookById } from "api/getBookById";
+import { CartItemsList } from "./CartItemsList";
 
 export const CartDrawer: FC<{}> = () => {
   const { isCartDrawerVisible } = useAppSelector((state) => state.ui);
-  const { booksInCart } = useAppSelector((state) => state.books);
   const dispatch = useAppDispatch();
   const history = useHistory();
 
@@ -56,17 +55,7 @@ export const CartDrawer: FC<{}> = () => {
         </DrawerHeader>
         <Divider orientation="horizontal" />
         <DrawerBody>
-          {!booksInCart ? (
-            <Text color="gray.500">Koszyk jest pusty</Text>
-          ) : (
-            booksInCart.map((book) => {
-              console.log(
-                getBookById(book.id)
-                  .then((data) => data)
-                  .then((json) => json)
-              );
-            })
-          )}
+          <CartItemsList />
         </DrawerBody>
         <Divider />
         <DrawerFooter justifyContent="center">

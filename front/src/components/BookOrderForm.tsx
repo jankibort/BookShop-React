@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAppSelector } from "store";
+import { postOrder } from "api/postOder";
 
 type BookFormInputs = {
   first_name: string;
@@ -55,8 +56,11 @@ export const BookOrderForm: FC<{}> = () => {
   });
 
   const onSubmit = (formData: BookFormInputs) => {
-    // const orderData = {};
-    console.log("hera koka hasz");
+    const booksDetails = booksInCart.map((bookItem) => {
+      return { id: bookItem.id, quantity: bookItem.quantity };
+    });
+    const orderData = { ...formData, order: booksDetails };
+    postOrder(orderData);
   };
 
   return (
@@ -82,7 +86,7 @@ export const BookOrderForm: FC<{}> = () => {
           <Input size="sm" {...register("zip_code")} />
           <FormErrorMessage>{errors.zip_code?.message}</FormErrorMessage>
         </FormControl>
-        <Button type="submit" colorScheme="teal">
+        <Button type="submit" colorScheme="teal" disabled={!booksInCart.length}>
           ZAMAWIAM I PŁACĘ
         </Button>
       </Stack>

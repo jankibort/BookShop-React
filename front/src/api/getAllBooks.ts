@@ -22,6 +22,5 @@ export const getAllBooks: (page: number) => Promise<{
 }> = async (page) => {
   return await axios
     .get("http://localhost:3001/api/book", { params: { page: page } })
-    .then((res) => res.data)
-    .then((json) => json);
+    .then((res) => res.data);
 };
