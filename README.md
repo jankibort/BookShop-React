@@ -13,5 +13,7 @@ TODO's for feature release :)
 - transition on pagination change
 - more cart-management tools
 - persisting cart state (cookies or session storage usage)
+- products prices scaling
+- moving strings into locales object with key based on components names
 
 //FIXME: bug on post request - err 422
