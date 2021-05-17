@@ -1,5 +1,5 @@
 #### To run BookShop project it's necessary to start both mock and front server:
-
+Api server was cloned from https://gitlab.gwo.pl/recruitment/react-task 
 - cd api
 - yarn install
 - yarn start
